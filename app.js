@@ -1,10 +1,9 @@
-
 document.addEventListener("DOMContentLoaded", () => {
     const generateBtn = document.getElementById("generate-btn");
     const salarySlipTextarea = document.getElementById("salary-slip");
+    const downloadBtn = document.getElementById("download-btn");
 
     generateBtn.addEventListener("click", () => {
-
         const employeeName = document.getElementById("employee-name").value;
         const designation = document.getElementById("designation").value;
         const dob = document.getElementById("dob").value;
@@ -24,42 +23,55 @@ document.addEventListener("DOMContentLoaded", () => {
         const totalDeductions = pf + tax;
         const netSalary = totalEarnings - totalDeductions;
 
-
         const salarySlipContent = `
-        Payroll ATS - Salary Slip
+Payroll ATS - Salary Slip
 
-        Employee Details:
-        -------------------------
-        Name           : ${employeeName || "N/A"}
-        Designation    : ${designation || "N/A"}
-        Date of Birth  : ${dob || "N/A"}
-        Date of Joining: ${doj || "N/A"}
-        PAN            : ${pan || "N/A"}
-        Bank A/C No    : ${bank || "N/A"}
+Employee Details:
+-------------------------
+Name           : ${employeeName || "N/A"}
+Designation    : ${designation || "N/A"}
+Date of Birth  : ${dob || "N/A"}
+Date of Joining: ${doj || "N/A"}
+PAN            : ${pan || "N/A"}
+Bank A/C No    : ${bank || "N/A"}
 
-        Earnings:
-        -------------------------
-        Basic          : ${basic.toFixed(2)}
-        HRA            : ${hra.toFixed(2)}
-        DA             : ${da.toFixed(2)}
-        Medical        : ${medical.toFixed(2)}
-        Total Earnings : ${totalEarnings.toFixed(2)}
+Earnings:
+-------------------------
+Basic          : ${basic.toFixed(2)}
+HRA            : ${hra.toFixed(2)}
+DA             : ${da.toFixed(2)}
+Medical        : ${medical.toFixed(2)}
+Total Earnings : ${totalEarnings.toFixed(2)}
 
-        Deductions:
-        -------------------------
-        PF             : ${pf.toFixed(2)}
-        Tax            : ${tax.toFixed(2)}
-        Total Deductions: ${totalDeductions.toFixed(2)}
+Deductions:
+-------------------------
+PF             : ${pf.toFixed(2)}
+Tax            : ${tax.toFixed(2)}
+Total Deductions: ${totalDeductions.toFixed(2)}
 
-        Net Salary:
-        -------------------------
-        Net Salary     : ${netSalary.toFixed(2)}
+Net Salary:
+-------------------------
+Net Salary     : ${netSalary.toFixed(2)}
         `;
 
         // Display the salary slip in the textarea
         salarySlipTextarea.value = salarySlipContent;
+    });
 
+    downloadBtn.addEventListener("click", () => {
+        const salarySlipText = salarySlipTextarea.value;
+        if (!salarySlipText) {
+            alert("Please generate the salary slip first.");
+            return;
+        }
 
+        const blob = new Blob([salarySlipText], { type: "text/plain" });
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = "Salary_Slip.txt";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
     });
 });
 
