@@ -13,6 +13,19 @@ body {
     gap: 20px;
 }
 
+.logo-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+
+}
+
+.logo {
+    width: 100px; 
+    height: auto;
+    border-radius: 10px;
+}
+
 .left-section, .right-section {
     flex: 1;
     background: #e7e1f6;
@@ -133,3 +146,21 @@ textarea:focus {
     box-shadow: 0 0 5px rgba(109, 88, 241, 0.5);
     background-color: #ffffff;
 }
+
+#download-btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    background-color: #6d58f1;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#download-btn:hover {
+    background-color: #5747c7;
+}
+
